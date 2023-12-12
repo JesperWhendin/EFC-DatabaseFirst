@@ -3,10 +3,11 @@
 using EFC_DatabaseFirst.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using EFC_DatabaseFirst;
 
 Console.WriteLine("Executing database queries!");
 
-using var efcDb = new EfcDatabaseFirstContext();
+using var efcDb = new StoreManager();
 
 #region Utkommenterat
 
@@ -15,29 +16,65 @@ using var efcDb = new EfcDatabaseFirstContext();
 //efcDb.CreateCategory("RAM");
 //efcDb.CreateCategory("PSU");
 //efcDb.CreateCategory("SSD");
-//efcDb.CreateCategory("Mobo");
-//efcDb.CreateCategory("Cooler");
+//efcDb.CreateCategory("Cooling");
 //efcDb.CreateCategory("Chassi");
-//efcDb.CreateCategory("MonitorTESTTESTTESTTEST");
-
-//efcDb.CreateCategory("Motherboard");
-//efcDb.UpdateCategoryById(9, "Monitor");
-//efcDb.UpdateCategoryById(7, "Cooling");
-//efcDb.RemoveCategoryById(6);
-
-
-#endregion
+//efcDb.CreateCategory("Monitor");
 
 //var cpu = efcDb.Products.FirstOrDefault(p => p.Id == 3);
 //efcDb.Products.Remove(cpu);
 //efcDb.SaveChanges();
 
-efcDb.ShowAllCategories();
+//efcDb.ShowAllCategories();
 
-//efcDb.CreateProduct("Intel 14600k", 3990, 2);
-Console.WriteLine(efcDb.Products.FirstOrDefault(p => p.CategoryId == 2));
-efcDb.UpdateProductCategoryById(4, 1);
-Console.WriteLine(efcDb.Products.FirstOrDefault(p => p.CategoryId == 1));
+//efcDb.CreateProduct("Intel 14600k", 7290, 1);
+//Console.WriteLine(efcDb.Products.FirstOrDefault(p => p.CategoryId == 2));
+//efcDb.UpdateProductCategoryById(4, 1);
+
+//Console.WriteLine(efcDb.Products.FirstOrDefault(p => p.CategoryId == 1));
+
+//efcDb.ListCategoryById(1);
+
+//var test = efcDb.Products.SingleOrDefault(p => p.Id == 1);
+
+//Console.WriteLine(test);
+
+//efcDb.CreateSupplier("Inet", "Stora Åvägen 7");
+//efcDb.CreateSupplier("Komplett", null);
+//efcDb.CreateSupplier("Webhallen", null);
+//efcDb.CreateSupplier("Kjell & Co", null);
+
+//efcDb.CreateProduct("Nvidia 4070", 7290, 2);
+
+//var supplier = efcDb.Suppliers.SingleOrDefault(s => s.Id == 4);
+//efcDb.UpdateSupplierContactInfo(supplier, "Borgmästaregatan 5");
+
+//var updProdSup = efcDb.Products.SingleOrDefault(p => p.Id == 2);
+
+//efcDb.UpdateProductWithSupplier(updProdSup, 4);
+
+
+//////////foreach(var p in efcDb.Products)
+//////////{
+//////////    Console.WriteLine($"{p.Name}, {p.Id}");
+//////////}
+//////////Console.WriteLine("-----------------------------");
+
+//////////Console.WriteLine("Vilken produkt vill du lägga en tag på?");
+//////////var x = Convert.ToInt32(Console.ReadLine());
+
+//////////var test = efcDb.Products.SingleOrDefault(p => p.Id == x);
+//////////var tag = efcDb.Tags.SingleOrDefault(t => t.Id == 1);
+
+//////////efcDb.UpdateProductWithTag(test, tag);
+
+//efcDb.ListExistingTags();
+
+#endregion
+
+
+//efcDb.CreateTag("testTag2");
+efcDb.RemoveTag(1);
+
 
 
 Console.WriteLine("Database queries completed!");

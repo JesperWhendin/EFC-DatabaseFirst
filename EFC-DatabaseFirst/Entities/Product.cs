@@ -9,7 +9,7 @@ public partial class Product
 
     public string Name { get; set; } = null!;
 
-    public double? Price { get; set; }
+    public double Price { get; set; }
 
     public int? CategoryId { get; set; }
 
@@ -19,10 +19,5 @@ public partial class Product
 
     public virtual Supplier? Supplier { get; set; }
 
-    public override string ToString()
-    {
-        var productTs = string.Empty;
-        productTs += $"Id: {Id}\nName: {Name}\nPrice: {Price}kr\nComponent: {Category.Name}";
-        return productTs;
-    }
+    public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
 }
