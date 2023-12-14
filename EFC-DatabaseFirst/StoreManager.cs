@@ -109,13 +109,6 @@ namespace EFC_DatabaseFirst
             Console.WriteLine($"{updProd.Name} has been updated with supplier: {sup.Name}");
         }
 
-        public void UpdateProductWithTag(Product product, Tag tag)
-        {
-            var prod = Products.SingleOrDefault(p => p.Id == product.Id);
-            prod.Tags.Add(tag);
-            SaveChanges();
-            Console.WriteLine($"{prod.Name} har fått tagen {tag.Name}");
-        }
 
         #endregion
 
@@ -158,36 +151,53 @@ namespace EFC_DatabaseFirst
         }
 
         #endregion
-            
+
         #region TagCrud
 
         public void CreateTag(string name)
         {
             Tags.Add(new Tag() { Name = name });
             SaveChanges();
+            Console.WriteLine($"{name} has been added as a tag.");
         }
 
         public void RemoveTag(int id)
         {
-            var tag = Tags.Find(id);
-            Tags.Remove(tag);
+            var prodTag = Tags.Find(id);
+            var prodListWithTag = Products.Where(p => p.Id == id);
+            foreach (var p in prodListWithTag)
+            {
+                p.Tags.Remove(prodTag);
+                //Anropa RemoveTagFromProduct istället? V
+            }
+            //var tag = Tags.Find(id);
+            Tags.Remove(prodTag);
             SaveChanges();
-            Console.WriteLine($"{tag.Name} has been removed.");
+            Console.WriteLine($"{prodTag.Name} has been removed.");
 
         }
 
-        public void RemoveTagFromProduct(int id)
+        public void AddTagToProduct(Product product, Tag tag)
+        {
+            var prod = Products.SingleOrDefault(p => p.Id == product.Id);
+            prod.Tags.Add(tag);
+            SaveChanges();
+            Console.WriteLine($"{prod.Name} has beena assigned {tag.Name}-tag");
+        }
+
+
+        public void RemoveTagFromProduct(Product product, int id)
         {
             var tag = Tags.Find(id);
-            Tags.Remove(tag);
+            product.Tags.Remove(tag);
             SaveChanges();
-            Console.WriteLine($"{tag.Name} has been removed.");
+            Console.WriteLine($"{tag.Name}-tag has been removed from {product.Name}.");
 
         }
 
         public void ListExistingTags()
         {
-            foreach(var tag in Tags)
+            foreach (var tag in Tags)
             {
                 Console.WriteLine($"Tag Id: {tag.Id} | Tag Name: {tag.Name}");
             }

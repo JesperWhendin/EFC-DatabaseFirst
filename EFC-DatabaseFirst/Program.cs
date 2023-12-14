@@ -59,21 +59,27 @@ using var efcDb = new StoreManager();
 //////////}
 //////////Console.WriteLine("-----------------------------");
 
-//////////Console.WriteLine("Vilken produkt vill du lägga en tag på?");
+//////////Console.WriteLine("Skriv ett id-nummer?");
 //////////var x = Convert.ToInt32(Console.ReadLine());
 
 //////////var test = efcDb.Products.SingleOrDefault(p => p.Id == x);
 //////////var tag = efcDb.Tags.SingleOrDefault(t => t.Id == 1);
 
-//////////efcDb.UpdateProductWithTag(test, tag);
+//////////efcDb.AddTagToProduct(test, tag);
 
 //efcDb.ListExistingTags();
+
+//efcDb.CreateTag("testTag2");
+//efcDb.RemoveTag(1);
 
 #endregion
 
 
-//efcDb.CreateTag("testTag2");
-efcDb.RemoveTag(1);
+
+//Console.WriteLine("Skriv ett tagId-nummer?");
+//var inputTagId = Convert.ToInt32(Console.ReadLine());
+//efcDb.RemoveTag(inputTagId);
+
 
 
 
