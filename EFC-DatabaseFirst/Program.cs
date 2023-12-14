@@ -1,10 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿//See https://aka.ms/new-console-template for more information
+
+using System.Threading.Channels;
+
 
 using EFC_DatabaseFirst.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using EFC_DatabaseFirst;
 
+Console.WriteLine("Hello, World!");
 Console.WriteLine("Executing database queries!");
 
 using var efcDb = new StoreManager();
@@ -72,15 +76,57 @@ using var efcDb = new StoreManager();
 //efcDb.CreateTag("testTag2");
 //efcDb.RemoveTag(1);
 
+//foreach (var p in efcDb.Products)
+//{
+//    Console.WriteLine($"{p.Id}, {p.Name}");
+//}
+//Console.WriteLine("-----------------------------");
+//foreach (var t in efcDb.Tags)
+//{
+//    Console.WriteLine($"{t.Id}, {t.Name}");
+//}
+//Console.WriteLine("-----------------------------");
+
+//Console.WriteLine("Skriv ett id-nummer för att välja produkt.");
+//var xProd = Convert.ToInt32(Console.ReadLine());
+//var prod = efcDb.Products.SingleOrDefault(p => p.Id == xProd);
+
+//Console.WriteLine("Skriv ett id-nummer för att välja tag.");
+//var xTag = Convert.ToInt32(Console.ReadLine());
+//var tag = efcDb.Tags.SingleOrDefault(t => t.Id == xTag);
+
+//efcDb.AddTagToProduct(prod, tag);
+
+
+
 #endregion
 
 
 
-//Console.WriteLine("Skriv ett tagId-nummer?");
-//var inputTagId = Convert.ToInt32(Console.ReadLine());
-//efcDb.RemoveTag(inputTagId);
+foreach (var p in efcDb.Products)
+{
+    Console.WriteLine($"{p.Id}, {p.Name}");
+}
+Console.WriteLine("-----------------------------");
+foreach (var t in efcDb.Tags)
+{
+    Console.WriteLine($"{t.Id}, {t.Name}");
+}
+Console.WriteLine("-----------------------------");
+
+//Console.WriteLine("Skriv ett id-nummer för att välja produkt.");
+//var xProd = Convert.ToInt32(Console.ReadLine());
+//var prod = efcDb.Products.SingleOrDefault(p => p.Id == xProd);
+
+Console.WriteLine("Skriv ett id-nummer för att välja tag.");
+var xTag = Convert.ToInt32(Console.ReadLine());
+var tag = efcDb.Tags.SingleOrDefault(t => t.Id == xTag);
 
 
+//efcDb.AddTagToProduct(prod, tag);
+
+
+efcDb.GRemoveTag(xTag);
 
 
 Console.WriteLine("Database queries completed!");

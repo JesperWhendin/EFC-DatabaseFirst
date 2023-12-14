@@ -174,15 +174,33 @@ namespace EFC_DatabaseFirst
             Tags.Remove(prodTag);
             SaveChanges();
             Console.WriteLine($"{prodTag.Name} has been removed.");
+        } // Min tabort metod
 
-        }
+        public void GRemoveTag(int tagId)
+        {
+
+            var tags = Tags.Find(tagId);
+            foreach (var product in Products)
+            {
+                if (product.Tags == tags)
+
+                    product.Tags.Remove(tags);
+            }
+            Tags.Remove(tags);
+
+            SaveChanges();
+
+        } // Gabriels ta bort-metod
+
+
+
 
         public void AddTagToProduct(Product product, Tag tag)
         {
             var prod = Products.SingleOrDefault(p => p.Id == product.Id);
             prod.Tags.Add(tag);
             SaveChanges();
-            Console.WriteLine($"{prod.Name} has beena assigned {tag.Name}-tag");
+            Console.WriteLine($"{prod.Name} has been assigned {tag.Name}-tag");
         }
 
 
