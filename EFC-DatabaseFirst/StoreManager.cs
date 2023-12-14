@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFC_DatabaseFirst
 {
@@ -219,6 +220,135 @@ namespace EFC_DatabaseFirst
             {
                 Console.WriteLine($"Tag Id: {tag.Id} | Tag Name: {tag.Name}");
             }
+        }
+
+        #endregion
+
+        #region SearchFilter
+
+        public void FilterProducts()
+        {
+            Console.WriteLine("1. Category.\n2. Supplier.\n3. Tag.");
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Vad vill du basera din filtrering på?");
+            var choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    Console.Clear();
+                    foreach (var c in Categories)
+                    {
+                        Console.WriteLine($"{c.Id}. {c.Name}");
+                    }
+                    Console.WriteLine($"\nVilken kategori vill du filtrera på?");
+                    var categoryChoice = Convert.ToInt32(Console.ReadLine());
+                    if (categoryChoice == 1)
+                    {
+                        var categoryFilter = Products.Where(p => p.CategoryId == 1);
+                        foreach (var p in categoryFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+                    if (categoryChoice == 2)
+                    {
+                        var categoryFilter = Products.Where(p => p.CategoryId == 2);
+                        foreach (var p in categoryFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+                    if (categoryChoice == 3)
+                    {
+                        var categoryFilter = Products.Where(p => p.CategoryId == 3);
+                        foreach (var p in categoryFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+
+                    break;
+                case 2:
+                    Console.Clear();
+                    foreach (var s in Suppliers)
+                    {
+                        Console.WriteLine($"{s.Id}. {s.Name}");
+                    }
+                    Console.WriteLine($"\nVilken återförsäljare vill du filtrera på?");
+                    var supplierChoice = Convert.ToInt32(Console.ReadLine());
+                    if (supplierChoice == 1)
+                    {
+                        var supplierFilter = Products.Where(p => p.SupplierId == 1);
+                        foreach (var p in supplierFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+                    if (supplierChoice == 2)
+                    {
+                        var supplierFilter = Products.Where(p => p.SupplierId == 2);
+                        foreach (var p in supplierFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+                    if (supplierChoice == 3)
+                    {
+                        var supplierFilter = Products.Where(p => p.SupplierId == 3);
+                        foreach (var p in supplierFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+
+                    break;
+                case 3:
+                    Console.Clear();
+                    foreach (var t in Tags)
+                    {
+                        Console.WriteLine($"{t.Id}. {t.Name}");
+                    }   
+                    Console.WriteLine($"\nVilken tag vill du filtrera på?");
+                    var tagChoice = Convert.ToInt32(Console.ReadLine());
+                    if (tagChoice == 1)
+                    {
+                        //var retliFgat = Products.Where(p => p.Tags == 1);
+
+
+
+
+                        var tagFilter = Products.Include(p => p.Tags
+                            .Where(t => t.Id).Contains()
+                            .ToList();
+
+
+
+                        Tag tag = Tags.Find(3);
+                        if (tag != null)
+                        {
+                            var productsWithTag = Products
+                                .Where(p => p.Tags.Any(t => t.Id == tag.Id));
+
+                            foreach (var product in productsWithTag)
+                            {
+                                Console.WriteLine(product.Name);
+                            }
+                        }
+
+
+
+                        foreach (var p in tagFilter)
+                        {
+                            Console.WriteLine(p.Name);
+                        }
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         #endregion

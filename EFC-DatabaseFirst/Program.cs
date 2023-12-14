@@ -97,36 +97,45 @@ using var efcDb = new StoreManager();
 
 //efcDb.AddTagToProduct(prod, tag);
 
+//foreach (var p in efcDb.Products)
+//{
+//    Console.WriteLine($"{p.Id}, {p.Name}");
+//}
+//Console.WriteLine("-----------------------------");
+//foreach (var t in efcDb.Tags)
+//{
+//    Console.WriteLine($"{t.Id}, {t.Name}");
+//}
+//Console.WriteLine("-----------------------------");
+
+////Console.WriteLine("Skriv ett id-nummer för att välja produkt.");
+////var xProd = Convert.ToInt32(Console.ReadLine());
+////var prod = efcDb.Products.SingleOrDefault(p => p.Id == xProd);
+
+//Console.WriteLine("Skriv ett id-nummer för att välja tag.");
+//var xTag = Convert.ToInt32(Console.ReadLine());
+//var tag = efcDb.Tags.SingleOrDefault(t => t.Id == xTag);
+
+
+////efcDb.AddTagToProduct(prod, tag);
+
+
+//efcDb.GRemoveTag(xTag);
+
+
+//efcDb.UpdateProductCategoryById(1, 1);
+//efcDb.UpdateProductCategoryById(2, 2);
+//efcDb.UpdateProductCategoryById(3, 1);
+//efcDb.UpdateProductCategoryById(4, 2);
 
 
 #endregion
 
 
-
-foreach (var p in efcDb.Products)
-{
-    Console.WriteLine($"{p.Id}, {p.Name}");
-}
-Console.WriteLine("-----------------------------");
-foreach (var t in efcDb.Tags)
-{
-    Console.WriteLine($"{t.Id}, {t.Name}");
-}
-Console.WriteLine("-----------------------------");
-
-//Console.WriteLine("Skriv ett id-nummer för att välja produkt.");
-//var xProd = Convert.ToInt32(Console.ReadLine());
-//var prod = efcDb.Products.SingleOrDefault(p => p.Id == xProd);
-
-Console.WriteLine("Skriv ett id-nummer för att välja tag.");
-var xTag = Convert.ToInt32(Console.ReadLine());
-var tag = efcDb.Tags.SingleOrDefault(t => t.Id == xTag);
+efcDb.FilterProducts();
 
 
-//efcDb.AddTagToProduct(prod, tag);
 
-
-efcDb.GRemoveTag(xTag);
 
 
 Console.WriteLine("Database queries completed!");
